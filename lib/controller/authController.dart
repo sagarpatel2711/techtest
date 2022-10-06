@@ -79,4 +79,14 @@ class AuthController extends GetxController {
       DateTime.now().toString(),
     );
   }
+
+    FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+
+  Stream<QuerySnapshot<Map<String, dynamic>>> getUserData() {
+    return _firestore
+        .collection('user')
+        .orderBy('name', descending: false)
+        .snapshots();
+  }
 }

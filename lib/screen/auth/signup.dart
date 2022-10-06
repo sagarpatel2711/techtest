@@ -189,47 +189,45 @@ class SignUpView extends StatelessWidget {
                   ),
                   Obx(
                     () => Center(
-                      child: Expanded(
-                        child: Container(
-                          width: Get.width,
-                          child: ElevatedButton(
-                              style: ButtonStyle(
-                                  backgroundColor:
-                                      MaterialStateProperty.all<Color>(
-                                          AppColors.blue)),
-                              onPressed: () async {
-                                if (_formkey.currentState!.validate()) {
-                                  rxIsLoading.value = true;
-                                  try {
-                                    var val = await authController.createAccount(
-                                      name: _name.text,
-                                      email: _email.text,
-                                      phonenum: _phonenumber.text,
-                                      pass: _pass.text,
-                                    );
-                                    if (val) {
-                                      Get.offNamed(Routes.Login);
-                                      logger.i(val);
-                                    }
-                                  } catch (e) {
-                                    logger.e(e);
+                      child: Container(
+                        width: Get.width,
+                        child: ElevatedButton(
+                            style: ButtonStyle(
+                                backgroundColor:
+                                    MaterialStateProperty.all<Color>(
+                                        AppColors.blue)),
+                            onPressed: () async {
+                              if (_formkey.currentState!.validate()) {
+                                rxIsLoading.value = true;
+                                try {
+                                  var val = await authController.createAccount(
+                                    name: _name.text,
+                                    email: _email.text,
+                                    phonenum: _phonenumber.text,
+                                    pass: _pass.text,
+                                  );
+                                  if (val) {
+                                    Get.offNamed(Routes.Login);
+                                    logger.i(val);
                                   }
-                        
-                                  rxIsLoading.value = false;
+                                } catch (e) {
+                                  logger.e(e);
                                 }
-                              },
-                              child: rxIsLoading.value
-                                  ? SizedBox(
-                                      height: 20,
-                                      width: 20,
-                                      child: CircularProgressIndicator(
-                                        color: AppColors.white,
-                                      ))
-                                  : Text(
-                                      "Sign Up",
-                                      style: Custom_TextStyle.textStyle6,
-                                    )),
-                        ),
+                      
+                                rxIsLoading.value = false;
+                              }
+                            },
+                            child: rxIsLoading.value
+                                ? SizedBox(
+                                    height: 20,
+                                    width: 20,
+                                    child: CircularProgressIndicator(
+                                      color: AppColors.white,
+                                    ))
+                                : Text(
+                                    "Sign Up",
+                                    style: Custom_TextStyle.textStyle6,
+                                  )),
                       ),
                     ),
                   ),

@@ -12,6 +12,7 @@ import '../modal/authModal.dart';
 
 class ProfileView extends StatelessWidget {
   ProfileView({Key? key}) : super(key: key);
+  
 
   AuthController authController = Get.put(AuthController());
   String cCode = "+91";

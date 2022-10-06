@@ -10,8 +10,7 @@ class HomeScreen extends StatelessWidget {
   HomeScreen({Key? key}) : super(key: key);
   UserData userData = UserData();
   AuthController authController = Get.put(AuthController());
-  
-   
+
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +22,7 @@ class HomeScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-             SizedBox(
+            SizedBox(
               height: 50,
             ),
             Text(
@@ -37,30 +36,32 @@ class HomeScreen extends StatelessWidget {
               "Users",
               style: Custom_TextStyle.textStyle2,
             ),
-            
             StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+              stream: authController.getUserData(),
               builder: (context, snapshot) {
                 List<UserData> userdata = [];
                 userdata.addAll(
                     snapshot.data!.docs.map((item) => UserData.fromjson(item)));
 
-                return Expanded(
-                  child: Container(
-                    child: ListView.builder(
-                      shrinkWrap: true,
-                      physics: AlwaysScrollableScrollPhysics(),
-                      itemCount: userdata.length,
-                      itemBuilder: (context, index) {
-                        return Card(
-                          child: ListTile(
-                            title: Text("${userData.name}",style: Custom_TextStyle.textStyle7,),
-                            subtitle: Text("${userData.email}",style: Custom_TextStyle.textStyle5,),
-
-                         
+                return Container(
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    physics: AlwaysScrollableScrollPhysics(),
+                    itemCount: userdata.length,
+                    itemBuilder: (context, index) {
+                      return Card(
+                        child: ListTile(
+                          title: Text(
+                            userdata[index].name,
+                            style: Custom_TextStyle.textStyle7,
                           ),
-                        );
-                      },
-                    ),
+                          subtitle: Text(
+                           userdata[index].email,
+                            style: Custom_TextStyle.textStyle5,
+                          ),
+                        ),
+                      );
+                    },
                   ),
                 );
               },

@@ -175,39 +175,37 @@ class LoginView extends StatelessWidget {
                 ),
                 Obx(
                   () => Center(
-                    child: Expanded(
-                      child: Container(
-                        width: Get.width,
-                        child: ElevatedButton(
-                            style: ButtonStyle(
-                                backgroundColor: MaterialStateProperty.all<Color>(
-                                    AppColors.blue)),
-                            onPressed: () async {
-                              if (_formkey.currentState!.validate()) {
-                                rxIsLoading.value = true;
-                                try {
-                                  authController.signInAccount(
-                                      _email.text, _pass.text);
-                                } catch (e) {
-                                  logger.e(e);
-                                }
-      
-                                rxIsLoading.value = false;
+                    child: Container(
+                      width: Get.width,
+                      child: ElevatedButton(
+                          style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all<Color>(
+                                  AppColors.blue)),
+                          onPressed: () async {
+                            if (_formkey.currentState!.validate()) {
+                              rxIsLoading.value = true;
+                              try {
+                                authController.signInAccount(
+                                    _email.text, _pass.text);
+                              } catch (e) {
+                                logger.e(e);
                               }
-                            },
-                            child: rxIsLoading.value
-                                ? SizedBox(
-                                    height: 20,
-                                    width: 20,
-                                    child: CircularProgressIndicator(
-                                      color: AppColors.white,
-                                    ))
-                                : Text(
-                                    "Login",
-                                    style:
-                                    Custom_TextStyle.textStyle6,
-                                  )),
-                      ),
+      
+                              rxIsLoading.value = false;
+                            }
+                          },
+                          child: rxIsLoading.value
+                              ? SizedBox(
+                                  height: 20,
+                                  width: 20,
+                                  child: CircularProgressIndicator(
+                                    color: AppColors.white,
+                                  ))
+                              : Text(
+                                  "Login",
+                                  style:
+                                  Custom_TextStyle.textStyle6,
+                                )),
                     ),
                   ),
                 ),

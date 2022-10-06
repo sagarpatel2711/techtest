@@ -44,11 +44,10 @@ class AuthModal extends GetxService {
   String get userId => FirebaseAuth.instance.currentUser?.uid ?? "";
 
   Future<void> logout() async {
-    try {
-      user = UserData(id: "");
+    try {      
       FirebaseAuth.instance.signOut();
-    } catch (e, t) {
-      logger.e(e, t);
+    } catch (e) {
+      logger.e(e);
     }
   }
 
@@ -70,8 +69,8 @@ class AuthModal extends GetxService {
         });
         logger.d("user email : ${user.email}");
       }
-    } catch (e, t) {
-      logger.e("Service.getUser", e, t);
+    } catch (e) {
+      logger.e("Service.getUser", e);
     }
   }
 }
